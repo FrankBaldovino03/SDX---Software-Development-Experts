@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDX - Tech Hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== Reset & Variables ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #020617;
+            --accent-blue: #1653ee;
+            --tech-mint: #41acae;
+            --text-white: #f8fafc;
+            --text-gray: #94a3b8;
+            --bounce-curve: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --header-h: 80px;
+            --hero-h: 86vh;
+            --content-offset: 8%;
+            --hero-gradient: radial-gradient(circle at 50% -20%, #1e293b 0%, var(--bg-color) 80%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 40%, rgba(22, 83, 238, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(22, 83, 238, 0.04) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-color) 0%, #000000 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+            white-space: nowrap;
+        }
+
+        .btn--primary {
+            background: var(--accent-blue);
+            color: var(--text-white);
+        }
+
+        .btn--primary:hover {
+            background: #1245d0;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(22, 83, 238, 0.35);
+        }
+
+        .btn--sm {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .header__contact {
+            margin-right: 4px;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-h);
+            z-index: 100;
+            background: transparent;
+            transition: background 0.35s ease, backdrop-filter 0.35s ease;
+        }
+
+        .header--scrolled {
+            background-color: rgba(2, 6, 23, 0.72);
+            background-image: var(--hero-gradient);
+            backdrop-filter: blur(14px);
+        }
+
+        .header .container {
+            max-width: 100%;
+            padding-left: var(--content-offset);
+            padding-right: 16px;
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            height: var(--header-h);
+        }
+
+        .nav {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            min-width: 0;
+            margin-right: 6px;
+        }
+
+        .nav__item--contact-mobile {
+            display: none;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo__mark {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: var(--text-white);
+            line-height: 1;
+        }
+
+        .logo__tagline {
+            font-size: 0.45rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: 2px;
+        }
+
+        .nav__list {
+            display: flex;
+            align-items: center;
+            gap: clamp(16px, 1.8vw, 28px);
+            list-style: none;
+            flex-wrap: nowrap;
+        }
+
+        .nav__link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.2s;
+            padding-bottom: 4px;
+        }
+
+        .nav__link:hover {
+            color: var(--text-white);
+        }
+
+        .nav__link--active {
+            color: var(--text-white);
+        }
+
+        .nav__link--dropdown {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav__chevron {
+            width: 16px;
+            height: 16px;
+            opacity: 0.75;
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .menu-open .nav__link--dropdown .nav__chevron {
+            transform: rotate(180deg);
+        }
+
+        .lang-select {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-white);
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            height: 42px;
+            box-sizing: border-box;
+        }
+
+        .lang-select:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-dropdown--open .lang-select .nav__chevron {
+            transform: rotate(180deg);
+        }
+
+        .lang-dropdown {
+            position: relative;
+        }
+
+        .lang-dropdown__menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: rgba(2, 6, 23, 0.96);
+            border: none;
+            border-radius: 8px;
+            padding: 6px 0;
+            list-style: none;
+            width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            z-index: 101;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .lang-dropdown--open .lang-dropdown__menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-dropdown__item {
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.65);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lang-dropdown__item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-white);
+        }
+
+        .lang-dropdown__item--active {
+            color: var(--accent-blue) !important;
+            font-weight: 600;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-white);
+            border-radius: 2px;
+            transition: transform 0.3s;
+        }
+
+        /* ===== Command Center (Mega Menu) ===== */
+        .command-center {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(2, 6, 23, 0.96);
+            background-image: var(--hero-gradient);
+            backdrop-filter: blur(20px);
+            z-index: 99;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: calc(var(--header-h) + 30px) 5% 40px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .menu-open .command-center {
+            top: 0;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .grid-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .category-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .menu-card {
+            display: flex;
+            gap: 18px;
+            padding: 15px;
+            border-radius: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            border: none;
+        }
+
+        .menu-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .icon-box {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.65);
+            transition: all 0.4s;
+            font-size: 24px;
+        }
+
+        .menu-card:hover .icon-box {
+            background: var(--accent-blue);
+            color: white;
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .card-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            font-weight: 600;
+            color: var(--text-white);
+        }
+
+        .card-info p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.5;
+        }
+
+        .menu-open main {
+            filter: blur(8px);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        main {
+            transition: filter 0.5s, opacity 0.5s;
+        }
+
+        /* ===== Hero ===== */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: var(--hero-h);
+            max-height: 860px;
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color);
+            background-image: var(--hero-gradient);
+            overflow: hidden;
+            padding-top: var(--header-h);
+            padding-bottom: calc(70px + 20px);
+            box-sizing: border-box;
+        }
+
+        .hero-left {
+            flex: 1;
+            padding-left: var(--content-offset);
+            z-index: 10;
+            max-width: 650px;
+            align-self: center;
+        }
+
+        .hero-left h1, 
+        .hero-left p#main-desc, 
+        .hero-left .btn-tech, 
+        .hero-left .feature-item {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+        }
+
+        .hero-left.active h1, 
+        .hero-left.active p#main-desc, 
+        .hero-left.active .btn-tech, 
+        .hero-left.active .feature-item {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.8s var(--bounce-curve), transform 0.8s var(--bounce-curve);
+        }
+
+        .hero-left.active h1 { transition-delay: 0.1s; }
+        .hero-left.active p#main-desc { transition-delay: 0.2s; }
+        .hero-left.active .btn-tech { transition-delay: 0.3s; }
+        .hero-left.active .feature-item:nth-child(1) { transition-delay: 0.4s; }
+        .hero-left.active .feature-item:nth-child(2) { transition-delay: 0.5s; }
+        .hero-left.active .feature-item:nth-child(3) { transition-delay: 0.6s; }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border: 1px solid var(--tech-mint);
+            color: var(--tech-mint);
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+        }
+
+        .hero-left.active .badge {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.8s var(--bounce-curve), transform 0.8s var(--bounce-curve);
+            transition-delay: 0s;
+        }
+
+        .text-group h1 {
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(to bottom, #fff 60%, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-group p#main-desc {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn-tech {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--accent-blue);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 24px rgba(22, 83, 238, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-tech:hover {
+            background: #1245d0;
+            box-shadow: 0 12px 32px rgba(22, 83, 238, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-tech svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-tech:hover svg {
+            transform: translateX(4px);
+        }
+
+        .features-grid {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 28px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            position: relative;
+        }
+
+        .feature-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 25px;
+            background: rgba(148, 163, 184, 0.3);
+        }
+
+        .feature-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--tech-mint);
+            margin-top: 2px;
+        }
+
+        .feature-info h3 {
+            font-size: 0.85rem;
+            color: var(--tech-mint);
+            font-weight: 600;
+            margin-bottom: 1px;
+            white-space: nowrap;
+        }
+
+        .feature-info p {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            white-space: nowrap;
+        }
+
+        .hero-right {
+            flex: 1;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+            align-self: center;
+        }
+
+        .png-slide {
+            position: absolute;
+            height: 88%;
+            width: auto;
+            opacity: 0;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            pointer-events: none;
+        }
+
+        .png-slide.active { opacity: 1; }
+        .slide-in { animation: slideIn 1s var(--bounce-curve) forwards; }
+        .slide-out { animation: slideOut 0.5s ease-in forwards; }
+        .floating { animation: floating 6s ease-in-out infinite; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideOut { to { opacity: 0; transform: scale(0.95); } }
+        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        .wave-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 115px;
+            z-index: 2;
+        }
+
+        .waves-svg { width: 100%; height: 100%; }
+        .parallax > use { animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite; }
+        .parallax > use:nth-child(4) { fill: var(--bg-color); }
+        @keyframes move-forever { 0% { transform: translate3d(-90px,0,0); } 100% { transform: translate3d(85px,0,0); } }
+
+        @media (max-width: 1024px) {
+            .header .container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero { flex-direction: column; text-align: center; padding-top: var(--header-h); align-items: center; }
+            .hero-left { padding: 0 20px; max-width: 100%; align-self: center; }
+            .features-grid { justify-content: center; gap: 20px; flex-direction: column; }
+            .feature-item:not(:last-child)::after { display: none; }
+            .hero-right { height: 40%; width: 100%; }
+            .png-slide { height: 90%; }
+            .grid-container { grid-template-columns: 1fr; }
+            .nav-toggle { display: flex; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header__inner">
+            <a href="index.html" class="logo">
+                <span class="logo__mark">SDX</span>
+                <span class="logo__tagline">SOFTWARE DEVELOPMENT EXPERTS</span>
+            </a>
+
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="#inicio" class="nav__link nav__link--active">Inicio</a></li>
+                    <li><a href="#nosotros" class="nav__link">Acerca de nosotros</a></li>
+                    <li>
+                        <a href="#" class="nav__link nav__link--dropdown" id="menuDropdownTrigger">
+                            Servicios
+                            <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li><a href="#soluciones" class="nav__link">Soluciones</a></li>
+                    <li><a href="#blog" class="nav__link">Blog</a></li>
+                </ul>
+            </nav>
+
+            <a href="#contacto" class="btn btn--primary btn--sm header__contact">
+                <span>Contacto</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+
+            <div class="lang-dropdown" id="langDropdown">
+                <button class="lang-select" type="button" id="langSelectBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                    <span id="activeLangCode">ES</span>
+                    <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+                <ul class="lang-dropdown__menu" id="langDropdownMenu">
+                    <li class="lang-dropdown__item lang-dropdown__item--active" data-lang="es">Español</li>
+                    <li class="lang-dropdown__item" data-lang="en">English</li>
+                </ul>
+            </div>
+
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Command Center (Mega Menu) -->
+    <div class="command-center" id="commandCenter">
+        <div class="grid-container">
+            <div>
+                <p class="category-title">Plataforma Core</p>
+                <a href="#" class="menu-card">
+                    <div class="icon-box">⚡</div>
+                    <div class="card-info">
+                        <h4>High-Speed Analytics</h4>
+                        <p>Procesamiento de datos en tiempo real con latencia cero.</p>
+                    </div>
+                </a>
+                <a href="#" class="menu-card">
+                    <div class="icon-box">🔒</div>
+                    <div class="card-info">
+                        <h4>Zero Trust Security</h4>
+                        <p>Cifrado de extremo a extremo y gestión de identidad avanzada.</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <p class="category-title">Escalabilidad</p>
+                <a href="#" class="menu-card">
+                    <div class="icon-box">📚</div>
+                    <div class="card-info">
+                        <h4>Multi-Cloud Hub</h4>
+                        <p>Gestiona AWS, Azure y GCP desde una sola interfaz.</p>
+                    </div>
+                </a>
+                <a href="#" class="menu-card">
+                    <div class="icon-box">🤖</div>
+                    <div class="card-info">
+                        <h4>AI Copilot</h4>
+                        <p>Asistente inteligente para optimización de costes.</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <p class="category-title">Ecosistema</p>
+                <a href="#" class="menu-card">
+                    <div class="icon-box">💻</div>
+                    <div class="card-info">
+                        <h4>API Reference</h4>
+                        <p>Documentación técnica para desarrolladores senior.</p>
+                    </div>
+                </a>
+                <a href="#" class="menu-card">
+                    <div class="icon-box">👥</div>
+                    <div class="card-info">
+                        <h4>Comunidad</h4>
+                        <p>Únete a más de 50k ingenieros en todo el mundo.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-left" id="text-side">
+                <div class="text-group">
+                    <span class="badge">Infraestructura en la nube</span>
+                    <h1 id="main-title">Digital Evolution</h1>
+                    <p id="main-desc">Potenciamos empresas con software a medida, garantizando escalabilidad y eficiencia tecnológica en cada proceso.</p>
+                    <a href="#" class="btn-tech">
+                        VER PORTAFOLIO
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2m-15.34 5.66-1.41 1.41m14.14-14.14-1.41 1.41"/></svg>
+                        </div>
+                        <div class="feature-info">
+                            <h3 id="f-t1">Soluciones a medida</h3>
+                            <p id="f-d1">Adaptadas a tus necesidades</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="feature-info">
+                            <h3 id="f-t2">Tecnología de vanguardia</h3>
+                            <p id="f-d2">Las mejores herramientas</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                        </div>
+                        <div class="feature-info">
+                            <h3 id="f-t3">Soporte continuo</h3>
+                            <p id="f-d3">Acompañamiento garantizado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/male-web-developer-working-on-laptop-5691621-4759503.png" class="png-slide" alt="1">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/female-web-developer-working-on-project-5691616-4759498.png" class="png-slide" alt="2">
+                <img src="boss-baby-2_header-mobile-removebg-preview.png" class="png-slide" alt="3">
+            </div>
+
+            <div class="wave-footer">
+                <svg class="waves-svg" viewBox="0 24 150 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(22, 83, 238, 0.3)" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(65, 172, 174, 0.2)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(22, 83, 238, 0.1)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--bg-color)" />
+                    </g>
+                </svg>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ===== Menu JavaScript =====
+        const navToggle = document.getElementById('navToggle');
+        const commandCenter = document.getElementById('commandCenter');
+        const menuDropdownTrigger = document.getElementById('menuDropdownTrigger');
+        const servicesNavItem = menuDropdownTrigger.closest('li');
+        const header = document.getElementById('header');
+        const langSelectBtn = document.getElementById('langSelectBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const langDropdownMenu = document.getElementById('langDropdownMenu');
+
+        let menuCloseTimer = null;
+        const MENU_CLOSE_DELAY = 200;
+
+        function isDesktopMenu() {
+            return window.matchMedia('(min-width: 1025px)').matches;
+        }
+
+        function openMenu() {
+            clearTimeout(menuCloseTimer);
+            document.body.classList.add('menu-open');
+        }
+
+        function closeMenu() {
+            clearTimeout(menuCloseTimer);
+            document.body.classList.remove('menu-open');
+        }
+
+        function scheduleCloseMenu() {
+            clearTimeout(menuCloseTimer);
+            menuCloseTimer = window.setTimeout(closeMenu, MENU_CLOSE_DELAY);
+        }
+
+        function isMenuZone(element) {
+            if (!element) return false;
+            return (
+                menuDropdownTrigger.contains(element) ||
+                servicesNavItem.contains(element) ||
+                commandCenter.contains(element)
+            );
+        }
+
+        navToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.classList.toggle('menu-open');
+        });
+
+        menuDropdownTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!isDesktopMenu()) {
+                document.body.classList.toggle('menu-open');
+            }
+        });
+
+        menuDropdownTrigger.addEventListener('mouseenter', () => {
+            if (isDesktopMenu()) openMenu();
+        });
+
+        servicesNavItem.addEventListener('mouseenter', () => {
+            if (isDesktopMenu()) openMenu();
+        });
+
+        commandCenter.addEventListener('mouseenter', () => {
+            if (isDesktopMenu()) openMenu();
+        });
+
+        document.querySelectorAll('.nav__link:not(#menuDropdownTrigger)').forEach((link) => {
+            link.addEventListener('mouseenter', () => {
+                if (isDesktopMenu()) scheduleCloseMenu();
+            });
+        });
+
+        header.addEventListener('mouseleave', (e) => {
+            if (!isDesktopMenu()) return;
+            if (isMenuZone(e.relatedTarget)) return;
+            scheduleCloseMenu();
+        });
+
+        commandCenter.addEventListener('mouseleave', (e) => {
+            if (!isDesktopMenu()) return;
+            if (isMenuZone(e.relatedTarget)) return;
+            scheduleCloseMenu();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenu();
+        });
+
+        commandCenter.addEventListener('click', (e) => {
+            if (e.target.classList.contains('menu-card') || e.target.closest('.menu-card')) {
+                document.body.classList.remove('menu-open');
+            }
+        });
+
+        langSelectBtn.addEventListener('click', () => {
+            langDropdown.classList.toggle('lang-dropdown--open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('lang-dropdown--open');
+            }
+        });
+
+        langDropdownMenu.addEventListener('click', (e) => {
+            if (e.target.classList.contains('lang-dropdown__item')) {
+                document.querySelectorAll('.lang-dropdown__item').forEach(item => {
+                    item.classList.remove('lang-dropdown__item--active');
+                });
+                e.target.classList.add('lang-dropdown__item--active');
+                document.getElementById('activeLangCode').textContent = e.target.dataset.lang.toUpperCase();
+                langDropdown.classList.remove('lang-dropdown--open');
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('header--scrolled');
+            } else {
+                header.classList.remove('header--scrolled');
+            }
+        });
+
+        // ===== Hero JavaScript =====
+        const contentData = [
+            { 
+                title: "Digital Evolution", 
+                desc: "Potenciamos empresas con software a medida, garantizando escalabilidad y eficiencia tecnológica en cada proceso.",
+                f1: ["Soluciones a medida", "Adaptadas a tus necesidades"], f2: ["Tecnología de vanguardia", "Las mejores herramientas"], f3: ["Soporte continuo", "Acompañamiento garantizado"]
+            },
+            { 
+                title: "Cloud Systems", 
+                desc: "Migramos tu negocio a la nube con infraestructuras modernas, seguras y de alta disponibilidad global.",
+                f1: ["Soluciones a medida", "Adaptadas a tus necesidades"], f2: ["Tecnología de vanguardia", "Las mejores herramientas"], f3: ["Soporte continuo", "Acompañamiento garantizado"]
+            },
+            { 
+                title: "Smart Innovation", 
+                desc: "Transformamos ideas complejas en productos digitales intuitivos y de alto impacto real en el mercado.",
+                f1: ["Soluciones a medida", "Adaptadas a tus necesidades"], f2: ["Tecnología de vanguardia", "Las mejores herramientas"], f3: ["Soporte continuo", "Acompañamiento garantizado"]
+            }
+        ];
+
+        let index = 0;
+        const textSide = document.getElementById('text-side');
+        const titleEl = document.getElementById('main-title');
+        const descEl = document.getElementById('main-desc');
+        const images = document.querySelectorAll('.png-slide');
+
+        const ft1 = document.getElementById('f-t1'), fd1 = document.getElementById('f-d1');
+        const ft2 = document.getElementById('f-t2'), fd2 = document.getElementById('f-d2');
+        const ft3 = document.getElementById('f-t3'), fd3 = document.getElementById('f-d3');
+
+        function updateSlide() {
+            textSide.classList.remove('active');
+            const currentImg = images[index];
+            currentImg.classList.remove('floating', 'slide-in');
+            currentImg.classList.add('slide-out');
+
+            setTimeout(() => {
+                currentImg.classList.remove('active', 'slide-out');
+                
+                index = (index + 1) % contentData.length;
+                const data = contentData[index];
+
+                titleEl.innerText = data.title;
+                descEl.innerText = data.desc;
+                ft1.innerText = data.f1[0]; fd1.innerText = data.f1[1];
+                ft2.innerText = data.f2[0]; fd2.innerText = data.f2[1];
+                ft3.innerText = data.f3[0]; fd3.innerText = data.f3[1];
+
+                const nextImg = images[index];
+                nextImg.classList.add('active', 'slide-in');
+                textSide.classList.add('active');
+
+                setTimeout(() => {
+                    if(nextImg.classList.contains('active')) nextImg.classList.add('floating');
+                }, 1000);
+            }, 450); 
+        }
+
+        window.addEventListener('load', () => {
+            textSide.classList.add('active');
+            images[0].classList.add('active', 'slide-in');
+            setTimeout(() => images[0].classList.add('floating'), 1000);
+            setInterval(updateSlide, 18000);
+        });
+    </script>
+</body>
+</html>
