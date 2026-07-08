@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
     <style>
         /* ===== Reset & Variables ===== */
@@ -25,7 +26,6 @@
             --bounce-curve: cubic-bezier(0.34, 1.56, 0.64, 1);
             --header-h: 80px;
             --hero-h: 86vh;
-            --content-offset: 8%;
             --hero-gradient: radial-gradient(circle at 50% -20%, #1e293b 0%, var(--bg-color) 80%);
         }
 
@@ -90,11 +90,7 @@
 
         .btn--sm {
             padding: 10px 20px;
-            font-size: 1rem;
-        }
-
-        .header__contact {
-            margin-right: 4px;
+            font-size: 0.85rem;
         }
 
         /* ===== Header ===== */
@@ -115,10 +111,117 @@
             backdrop-filter: blur(14px);
         }
 
-        .header .container {
-            max-width: 100%;
-            padding-left: var(--content-offset);
-            padding-right: 16px;
+        /* ===== Header en Tema Claro (Cuando pasa por la sección blanca) ===== */
+        .header.header--light {
+            background-color: rgba(255, 255, 255, 0.94);
+            background-image: none;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .header.header--light .logo__mark {
+            color: #0f172a;
+        }
+
+        .header.header--light .logo__tagline {
+            color: rgba(15, 23, 42, 0.5);
+        }
+
+        .header.header--light .nav__link {
+            color: rgba(15, 23, 42, 0.7);
+        }
+
+        .header.header--light .nav__link:hover,
+        .header.header--light .nav__link--active {
+            color: var(--bg-color); /* El azul oscuro original del index */
+        }
+
+        /* Botón de Contacto adaptado al azul oscuro en menú claro */
+        .header.header--light .header__contact {
+            background: var(--bg-color);
+            color: #ffffff;
+        }
+
+        .header.header--light .header__contact:hover {
+            background: #0f172a;
+            box-shadow: 0 8px 24px rgba(2, 6, 23, 0.25);
+        }
+
+        .header.header--light .lang-select {
+            background: rgba(15, 23, 42, 0.06);
+            color: #0f172a;
+        }
+
+        .header.header--light .lang-select:hover {
+            background: rgba(15, 23, 42, 0.1);
+        }
+
+        /* Botón de Menú Móvil en Claro */
+        .header.header--light .nav-toggle span {
+            background-color: #0f172a;
+        }
+
+        /* Menú desplegable de idiomas en Tema Claro */
+        .header.header--light .lang-dropdown__menu {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+        }
+
+        .header.header--light .lang-dropdown__item {
+            color: rgba(15, 23, 42, 0.7);
+        }
+
+        .header.header--light .lang-dropdown__item:hover {
+            background: rgba(15, 23, 42, 0.05);
+            color: #0f172a;
+        }
+
+        .header.header--light .lang-dropdown__item--active {
+            color: var(--bg-color) !important; /* Azul oscuro original del index */
+            font-weight: 700;
+        }
+
+        /* Command Center (Mega Menú) en Tema Claro */
+        .header.header--light + .command-center {
+            background-color: rgba(255, 255, 255, 0.98);
+            background-image: none; /* Sin fondo oscuro radial */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .header.header--light + .command-center .category-title {
+            color: rgba(15, 23, 42, 0.45);
+        }
+
+        .header.header--light + .command-center .menu-card {
+            color: #0f172a;
+        }
+
+        .header.header--light + .command-center .menu-card:hover {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        .header.header--light + .command-center .icon-box {
+            background: rgba(15, 23, 42, 0.04);
+            color: rgba(15, 23, 42, 0.65);
+        }
+
+        .header.header--light + .command-center .menu-card:hover .icon-box {
+            background: var(--accent-blue);
+            color: #ffffff;
+        }
+
+        .header.header--light + .command-center .card-info h4 {
+            color: #0f172a;
+        }
+
+        .header.header--light + .command-center .card-info p {
+            color: rgba(15, 23, 42, 0.65);
         }
 
         .header__inner {
@@ -134,7 +237,6 @@
             display: flex;
             justify-content: flex-end;
             min-width: 0;
-            margin-right: 6px;
         }
 
         .nav__item--contact-mobile {
@@ -176,7 +278,7 @@
             position: relative;
             color: rgba(255, 255, 255, 0.65);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.875rem;
             font-weight: 400;
             transition: color 0.2s;
             padding-bottom: 4px;
@@ -197,8 +299,8 @@
         }
 
         .nav__chevron {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             opacity: 0.75;
             transition: transform 0.25s ease;
             flex-shrink: 0;
@@ -218,11 +320,11 @@
             background: rgba(255, 255, 255, 0.06);
             color: var(--text-white);
             font-family: 'Jost', sans-serif;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
-            height: 42px;
+            height: 38px;
             box-sizing: border-box;
         }
 
@@ -421,7 +523,7 @@
 
         .hero-left {
             flex: 1;
-            padding-left: var(--content-offset);
+            padding-left: 8%;
             z-index: 10;
             max-width: 650px;
             align-self: center;
@@ -616,11 +718,6 @@
         @keyframes move-forever { 0% { transform: translate3d(-90px,0,0); } 100% { transform: translate3d(85px,0,0); } }
 
         @media (max-width: 1024px) {
-            .header .container {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
             .hero { flex-direction: column; text-align: center; padding-top: var(--header-h); align-items: center; }
             .hero-left { padding: 0 20px; max-width: 100%; align-self: center; }
             .features-grid { justify-content: center; gap: 20px; flex-direction: column; }
@@ -629,6 +726,649 @@
             .png-slide { height: 90%; }
             .grid-container { grid-template-columns: 1fr; }
             .nav-toggle { display: flex; }
+        }
+
+        /* ===== SDX Tech Stack Explorer Banner ===== */
+        .engine-banner-section {
+            padding: 30px 0;
+            background-color: var(--bg-color);
+            position: relative;
+            z-index: 10;
+            margin-top: -2px; /* Prevent subpixel gaps with hero wave */
+        }
+
+        .engine-banner {
+            display: grid;
+            grid-template-columns: auto 1.3fr 1.7fr;
+            align-items: center;
+            gap: clamp(15px, 2.5vw, 35px);
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 20px 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 
+                        0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 120px;
+        }
+
+        .engine-banner:hover {
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 
+                        0 20px 50px rgba(22, 83, 238, 0.15);
+        }
+
+        .banner-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(65, 172, 174, 0.12) 0%, transparent 70%);
+            top: -125px;
+            left: -125px;
+            pointer-events: none;
+            transition: transform 0.1s ease, opacity 0.5s ease;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .engine-banner:hover .banner-glow {
+            opacity: 1;
+        }
+
+        /* Status Label Column */
+        .banner-status {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-right: 1px solid rgba(148, 163, 184, 0.12);
+            padding-right: 25px;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .status-led {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--tech-mint);
+            box-shadow: 0 0 10px var(--tech-mint), 0 0 20px rgba(65, 172, 174, 0.6);
+            animation: pulse-led 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-led {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: 0 0 8px var(--tech-mint);
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0.65;
+                box-shadow: 0 0 14px var(--tech-mint), 0 0 25px rgba(65, 172, 174, 0.8);
+            }
+        }
+
+        .status-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-label {
+            font-size: 0.625rem;
+            font-weight: 700;
+            color: var(--text-gray);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+
+        .status-value {
+            font-size: 0.875rem;
+            font-weight: 800;
+            color: var(--text-white);
+            letter-spacing: 0.05em;
+            margin-top: 3px;
+        }
+
+        /* Tech Buttons Grid Center */
+        .banner-tech-grid {
+            display: flex;
+            gap: clamp(8px, 1.8vw, 16px);
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            padding: 0 5px;
+        }
+
+        .tech-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            color: var(--text-gray);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            outline: none;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .tech-btn i {
+            font-size: 22px;
+            transition: transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-btn:hover {
+            color: var(--text-white);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .tech-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Tech-specific Brand Glows when Active */
+        .tech-btn[data-tech="react"].active {
+            background: rgba(97, 218, 251, 0.1);
+            border-color: #61dafb;
+            color: #61dafb;
+            box-shadow: 0 0 16px rgba(97, 218, 251, 0.35);
+        }
+
+        .tech-btn[data-tech="node"].active {
+            background: rgba(51, 153, 51, 0.08);
+            border-color: #339933;
+            color: #39c139;
+            box-shadow: 0 0 16px rgba(51, 153, 51, 0.3);
+        }
+
+        .tech-btn[data-tech="go"].active {
+            background: rgba(0, 173, 216, 0.08);
+            border-color: #00add8;
+            color: #00add8;
+            box-shadow: 0 0 16px rgba(0, 173, 216, 0.35);
+        }
+
+        .tech-btn[data-tech="python"].active {
+            background: rgba(55, 118, 171, 0.08);
+            border-color: #3776ab;
+            color: #3776ab;
+            box-shadow: 0 0 16px rgba(55, 118, 171, 0.3);
+        }
+
+        .tech-btn[data-tech="aws"].active {
+            background: rgba(255, 153, 0, 0.08);
+            border-color: #ff9900;
+            color: #ff9900;
+            box-shadow: 0 0 16px rgba(255, 153, 0, 0.35);
+        }
+
+        /* Detail Panel Right */
+        .banner-detail-panel {
+            display: flex;
+            align-items: center;
+            border-left: 1px solid rgba(148, 163, 184, 0.12);
+            padding-left: 25px;
+            flex-shrink: 0;
+            min-height: 60px;
+            z-index: 1;
+        }
+
+        .detail-text {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .detail-text.changing {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .detail-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--tech-mint);
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-desc {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            line-height: 1.45;
+        }
+
+        /* Interactive Flash Effect */
+        .engine-banner.flash-ping {
+            animation: banner-flash 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        @keyframes banner-flash {
+            0% {
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+            30% {
+                box-shadow: 0 0 25px 3px rgba(65, 172, 174, 0.2), inset 0 0 10px rgba(65, 172, 174, 0.15);
+                border-color: var(--tech-mint);
+            }
+            100% {
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .engine-banner {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 22px;
+                min-height: auto;
+            }
+
+            .banner-status {
+                border-right: none;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+                padding-right: 0;
+                padding-bottom: 16px;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .banner-tech-grid {
+                padding: 5px 0;
+            }
+
+            .banner-detail-panel {
+                border-left: none;
+                border-top: 1px solid rgba(148, 163, 184, 0.12);
+                padding-left: 0;
+                padding-top: 16px;
+                justify-content: center;
+                width: 100%;
+                min-height: auto;
+                text-align: center;
+            }
+        }
+
+        /* ===== SECCIÓN DE PROCESO DE TRABAJO (TEMA OSCURO - TRANSPARENTE) ===== */
+        /* ===== SECCIÓN DE PROCESO DE TRABAJO (TEMA CLARO - FONDO BLANCO) ===== */
+        .process-full-width-section {
+            width: 100%;
+            background-color: var(--bg-color); /* Fondo oscuro plano para que coincida con la ola */
+            border-top: none; /* Quitada la línea de borde superior para que la ola fluya */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil inferior */
+            padding: 25px 0 70px 0; /* Reducido arriba para subir el contenido */
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            margin-top: -2px;
+        }
+
+        .process-full-width-section .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Cabecera Centrada */
+        .process-full-width-section .banner-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 0;
+            border: none;
+        }
+
+        .process-full-width-section .banner-title-box {
+            text-align: center;
+        }
+
+        .process-full-width-section .banner-badge {
+            font-size: calc(0.7rem + 9px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--tech-mint); /* Menta brillante de SDX */
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .process-full-width-section .banner-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-white); /* Texto principal blanco */
+            letter-spacing: -0.01em;
+        }
+
+        /* Contenedor del Flujo */
+        .process-track-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        /* Línea Conectora Horizontal Estática */
+        .process-track-line {
+            position: absolute;
+            top: 24px;
+            left: 8%;
+            right: 8%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1); /* Gris oscuro translúcido en tema oscuro */
+            z-index: 0;
+        }
+
+        /* Línea Activa Fluyente */
+        .process-track-active {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-blue) 0%, var(--tech-mint) 50%, var(--accent-blue) 100%);
+            background-size: 200% 100%;
+            box-shadow: 0 0 10px rgba(65, 172, 174, 0.25);
+            transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: dataFlow 3s linear infinite;
+        }
+
+        @keyframes dataFlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Paso Individual */
+        .process-step {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* Nodo (Giro 3D de 48px) */
+        .step-card {
+            width: 48px;
+            height: 48px;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .step-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .process-step.active .step-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Caras del Nodo */
+        .step-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-smooth);
+        }
+
+        .step-face-front {
+            background: rgba(30, 41, 59, 0.5); /* Translúcido en tema oscuro */
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .step-face-back {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #ffffff;
+            transform: rotateY(180deg);
+            box-shadow: 0 4px 12px rgba(22, 83, 238, 0.2);
+        }
+
+        .process-step:nth-child(even) .step-face-back {
+            background: var(--tech-mint);
+            border-color: var(--tech-mint);
+            box-shadow: 0 4px 12px rgba(65, 172, 174, 0.2);
+        }
+
+        .process-step.active .step-face-front {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Iconos SVG */
+        .step-face-back svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.2;
+        }
+
+        .process-step.active svg path,
+        .process-step.active svg polyline,
+        .process-step.active svg circle {
+            stroke-dasharray: 80;
+            animation: drawSvgPath 1.2s ease-in-out forwards;
+        }
+
+        @keyframes drawSvgPath {
+            from { stroke-dashoffset: 80; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* TEXTOS DE LOS PASOS */
+        .step-description-wrapper {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translateY(15px);
+            opacity: 0;
+            visibility: hidden;
+            transition: 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .process-step.active .step-description-wrapper {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .step-meta {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--tech-mint);
+            margin-bottom: 6px;
+        }
+
+        .step-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 6px;
+        }
+
+        .step-desc {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            line-height: 1.45;
+            max-width: 190px;
+            margin: 0 auto;
+        }
+
+        /* ===== Elementos de Fondo Vectoriales (Decoradores de la Imagen en Gris Suave) ===== */
+        .bg-decor {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 1; /* Opacidad al 100% para controlar visibilidad vía colores */
+            transition: var(--transition-smooth);
+        }
+
+        /* Forzar colores grises para que se distingan con elegancia sobre el fondo oscuro */
+        .bg-decor text {
+            fill: rgba(255, 255, 255, 0.04) !important; /* Marca de agua muy sutil */
+        }
+
+        .bg-decor line,
+        .bg-decor path,
+        .bg-decor rect {
+            stroke: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        .bg-decor circle {
+            fill: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        .bg-decor-top-left {
+            top: 15px;
+            left: 20px;
+            width: clamp(140px, 18vw, 200px);
+            animation: floatTopLeft 10s ease-in-out infinite alternate;
+        }
+
+        .bg-decor-top-right {
+            top: 15px;
+            right: 20px;
+            width: clamp(160px, 20vw, 240px);
+            animation: floatTopRight 12s ease-in-out infinite alternate;
+        }
+
+        .bg-decor-bottom-left {
+            bottom: 25px;
+            left: 30px;
+            width: clamp(90px, 12vw, 130px);
+            animation: floatBottomLeft 9s ease-in-out infinite alternate;
+        }
+
+        .bg-decor-bottom-right {
+            bottom: -15px;
+            right: 20px;
+            width: clamp(160px, 20vw, 240px);
+            animation: floatBottomRight 14s ease-in-out infinite alternate;
+        }
+
+        /* Animaciones de Flotación Sutiles */
+        @keyframes floatTopLeft {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes floatTopRight {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            100% { transform: translateY(12px) rotate(-1.5deg) scale(0.98); }
+        }
+
+        @keyframes floatBottomLeft {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(8px) translateX(-5px); }
+        }
+
+        @keyframes floatBottomRight {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .process-full-width-section {
+                padding: 40px 0;
+            }
+
+            .process-track-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 32px;
+                padding-left: 20px;
+            }
+
+            .process-track-line {
+                top: 0;
+                bottom: 0;
+                left: 43px;
+                width: 2px;
+                height: 100%;
+            }
+
+            .process-track-active {
+                width: 100%;
+                height: 0%;
+            }
+
+            .process-step {
+                flex-direction: row;
+                align-items: center;
+                gap: 16px;
+                text-align: left;
+                width: 100%;
+            }
+
+            .process-full-width-section .step-description-wrapper {
+                margin-top: 0;
+                text-align: left;
+                align-items: flex-start;
+                max-width: calc(100% - 64px);
+                transform: translateX(10px);
+            }
+
+            .process-step.active .step-description-wrapper {
+                transform: translateX(0);
+            }
+
+            .process-full-width-section .step-title, 
+            .process-full-width-section .step-desc {
+                text-align: left;
+                margin: 0;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -754,7 +1494,7 @@
         <section class="hero" id="inicio">
             <div class="hero-left" id="text-side">
                 <div class="text-group">
-                    <span class="badge">Infraestructura en la nube</span>
+                    <span class="badge" id="hero-badge">Infraestructura en la nube</span>
                     <h1 id="main-title">Digital Evolution</h1>
                     <p id="main-desc">Potenciamos empresas con software a medida, garantizando escalabilidad y eficiencia tecnológica en cada proceso.</p>
                     <a href="#" class="btn-tech">
@@ -814,6 +1554,181 @@
                 </svg>
             </div>
         </section>
+
+        <!-- Sección de Proceso de Trabajo Automática -->
+        <section class="process-full-width-section" id="process-wrapper">
+        <!-- Elementos de Fondo Vectoriales en Gris Suave (Sin puntos de luz brillante) -->
+        <!-- Superior Izquierda: Corchete de código y líneas -->
+        <svg class="bg-decor bg-decor-top-left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="75" font-family="monospace" font-size="54" fill="rgba(15,23,42,0.06)" font-weight="100">{</text>
+            <line x1="45" y1="40" x2="120" y2="40" stroke="rgba(15,23,42,0.03)" stroke-width="2" stroke-linecap="round" />
+            <line x1="45" y1="52" x2="95" y2="52" stroke="rgba(15,23,42,0.03)" stroke-width="2" stroke-linecap="round" />
+            <line x1="45" y1="64" x2="140" y2="64" stroke="rgba(15,23,42,0.03)" stroke-width="2" stroke-linecap="round" />
+            <path d="M 10 90 L 10 140 L 70 140" stroke="rgba(15,23,42,0.02)" stroke-width="1.2" fill="none" />
+        </svg>
+
+        <!-- Superior Derecha: Ventana de Código y circuito -->
+        <svg class="bg-decor bg-decor-top-right" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="50" y="20" width="100" height="70" rx="6" ry="6" fill="none" stroke="rgba(15,23,42,0.03)" stroke-width="1.2" />
+            <circle cx="62" cy="30" r="2" fill="rgba(15,23,42,0.04)" />
+            <circle cx="70" cy="30" r="2" fill="rgba(15,23,42,0.04)" />
+            <circle cx="78" cy="30" r="2" fill="rgba(15,23,42,0.04)" />
+            <path d="M 90 45 L 82 53 L 90 61 M 102 45 L 110 53 L 102 61 M 99 43 L 93 63" stroke="rgba(15,23,42,0.05)" stroke-width="1.2" fill="none" />
+            <path d="M 150 55 L 190 55 L 190 120 L 220 120" stroke="rgba(15,23,42,0.02)" stroke-width="1.2" fill="none" />
+        </svg>
+
+        <!-- Inferior Izquierda: Cuadrícula de puntitos (Dot Grid) -->
+        <svg class="bg-decor bg-decor-bottom-left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="30" cy="10" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="50" cy="10" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="70" cy="10" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="90" cy="10" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="10" cy="30" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="30" cy="30" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="50" cy="30" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="70" cy="30" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="90" cy="30" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="10" cy="50" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="30" cy="50" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="50" cy="50" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="70" cy="50" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="90" cy="50" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="10" cy="70" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="30" cy="70" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="50" cy="70" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="70" cy="70" r="1.5" fill="rgba(15,23,42,0.04)" />
+            <circle cx="90" cy="70" r="1.5" fill="rgba(15,23,42,0.04)" />
+        </svg>
+
+        <!-- Inferior Derecha: Ventana de código y circuitos -->
+        <svg class="bg-decor bg-decor-bottom-right" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="70" y="90" width="110" height="70" rx="6" ry="6" fill="none" stroke="rgba(15,23,42,0.03)" stroke-width="1.2" />
+            <circle cx="82" cy="100" r="2" fill="rgba(15,23,42,0.04)" />
+            <circle cx="90" cy="100" r="2" fill="rgba(15,23,42,0.04)" />
+            <circle cx="98" cy="100" r="2" fill="rgba(15,23,42,0.04)" />
+            <line x1="82" y1="116" x2="140" y2="116" stroke="rgba(15,23,42,0.03)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="82" y1="126" x2="160" y2="126" stroke="rgba(15,23,42,0.03)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="82" y1="136" x2="120" y2="136" stroke="rgba(15,23,42,0.03)" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M 70 120 L 20 120 L 20 50 L -10 50" stroke="rgba(15,23,42,0.02)" stroke-width="1.2" fill="none" />
+        </svg>
+
+            <div class="container">
+                <!-- Cabecera del Banner Centrada -->
+                <div class="banner-header">
+                    <div class="banner-title-box">
+                        <span class="banner-badge">Proceso de Trabajo</span>
+                        <h3 class="banner-title">Tu idea hecha realidad en cinco pasos</h3>
+                    </div>
+                </div>
+
+                <!-- Flujo de Proceso Conectado con bloqueo de carga inicial -->
+                <div class="process-track-container loading-mode" id="processTrackContainer">
+                    <!-- Línea de Conexión -->
+                    <div class="process-track-line">
+                        <div class="process-track-active" id="activeTrack"></div>
+                    </div>
+
+                    <!-- Paso 1 -->
+                    <div class="process-step" data-step="1">
+                        <div class="step-card">
+                            <div class="step-card-inner">
+                                <div class="step-face step-face-front">01</div>
+                                <div class="step-face step-face-back">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-description-wrapper">
+                            <span class="step-meta">Paso 01</span>
+                            <h4 class="step-title">Platicamos</h4>
+                            <p class="step-desc">Nos cuentas lo que necesita tu negocio sin tecnicismos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2 -->
+                    <div class="process-step" data-step="2">
+                        <div class="step-card">
+                            <div class="step-card-inner">
+                                <div class="step-face step-face-front">02</div>
+                                <div class="step-face step-face-back">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-description-wrapper">
+                            <span class="step-meta">Paso 02</span>
+                            <h4 class="step-title">Diseñamos</h4>
+                            <p class="step-desc">Creamos la propuesta visual e interactiva de tu sistema.</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3 -->
+                    <div class="process-step" data-step="3">
+                        <div class="step-card">
+                            <div class="step-card-inner">
+                                <div class="step-face step-face-front">03</div>
+                                <div class="step-face step-face-back">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="16 18 22 12 16 6" />
+                                        <polyline points="8 6 2 12 8 18" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-description-wrapper">
+                            <span class="step-meta">Paso 03</span>
+                            <h4 class="step-title">Desarrollamos</h4>
+                            <p class="step-desc">Programamos el software con código limpio y seguro.</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 4 -->
+                    <div class="process-step" data-step="4">
+                        <div class="step-card">
+                            <div class="step-card-inner">
+                                <div class="step-face step-face-front">04</div>
+                                <div class="step-face step-face-back">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v4l3 3" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-description-wrapper">
+                            <span class="step-meta">Paso 04</span>
+                            <h4 class="step-title">Probamos</h4>
+                            <p class="step-desc">Verificamos exhaustivamente que todo funcione a la perfección.</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 5 -->
+                    <div class="process-step" data-step="5">
+                        <div class="step-card">
+                            <div class="step-card-inner">
+                                <div class="step-face step-face-front">05</div>
+                                <div class="step-face step-face-back">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-description-wrapper">
+                            <span class="step-meta">Paso 05</span>
+                            <h4 class="step-title">Lanzamos</h4>
+                            <p class="step-desc">Ponemos en marcha la solución y te acompañamos en su uso.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <script>
@@ -821,42 +1736,10 @@
         const navToggle = document.getElementById('navToggle');
         const commandCenter = document.getElementById('commandCenter');
         const menuDropdownTrigger = document.getElementById('menuDropdownTrigger');
-        const servicesNavItem = menuDropdownTrigger.closest('li');
-        const header = document.getElementById('header');
         const langSelectBtn = document.getElementById('langSelectBtn');
         const langDropdown = document.getElementById('langDropdown');
         const langDropdownMenu = document.getElementById('langDropdownMenu');
-
-        let menuCloseTimer = null;
-        const MENU_CLOSE_DELAY = 200;
-
-        function isDesktopMenu() {
-            return window.matchMedia('(min-width: 1025px)').matches;
-        }
-
-        function openMenu() {
-            clearTimeout(menuCloseTimer);
-            document.body.classList.add('menu-open');
-        }
-
-        function closeMenu() {
-            clearTimeout(menuCloseTimer);
-            document.body.classList.remove('menu-open');
-        }
-
-        function scheduleCloseMenu() {
-            clearTimeout(menuCloseTimer);
-            menuCloseTimer = window.setTimeout(closeMenu, MENU_CLOSE_DELAY);
-        }
-
-        function isMenuZone(element) {
-            if (!element) return false;
-            return (
-                menuDropdownTrigger.contains(element) ||
-                servicesNavItem.contains(element) ||
-                commandCenter.contains(element)
-            );
-        }
+        const header = document.getElementById('header');
 
         navToggle.addEventListener('click', (e) => {
             e.preventDefault();
@@ -865,43 +1748,7 @@
 
         menuDropdownTrigger.addEventListener('click', (e) => {
             e.preventDefault();
-            if (!isDesktopMenu()) {
-                document.body.classList.toggle('menu-open');
-            }
-        });
-
-        menuDropdownTrigger.addEventListener('mouseenter', () => {
-            if (isDesktopMenu()) openMenu();
-        });
-
-        servicesNavItem.addEventListener('mouseenter', () => {
-            if (isDesktopMenu()) openMenu();
-        });
-
-        commandCenter.addEventListener('mouseenter', () => {
-            if (isDesktopMenu()) openMenu();
-        });
-
-        document.querySelectorAll('.nav__link:not(#menuDropdownTrigger)').forEach((link) => {
-            link.addEventListener('mouseenter', () => {
-                if (isDesktopMenu()) scheduleCloseMenu();
-            });
-        });
-
-        header.addEventListener('mouseleave', (e) => {
-            if (!isDesktopMenu()) return;
-            if (isMenuZone(e.relatedTarget)) return;
-            scheduleCloseMenu();
-        });
-
-        commandCenter.addEventListener('mouseleave', (e) => {
-            if (!isDesktopMenu()) return;
-            if (isMenuZone(e.relatedTarget)) return;
-            scheduleCloseMenu();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeMenu();
+            document.body.classList.toggle('menu-open');
         });
 
         commandCenter.addEventListener('click', (e) => {
@@ -942,16 +1789,19 @@
         // ===== Hero JavaScript =====
         const contentData = [
             { 
+                badge: "Infraestructura en la nube",
                 title: "Digital Evolution", 
                 desc: "Potenciamos empresas con software a medida, garantizando escalabilidad y eficiencia tecnológica en cada proceso.",
                 f1: ["Soluciones a medida", "Adaptadas a tus necesidades"], f2: ["Tecnología de vanguardia", "Las mejores herramientas"], f3: ["Soporte continuo", "Acompañamiento garantizado"]
             },
             { 
+                badge: "Arquitectura multi-cloud",
                 title: "Cloud Systems", 
                 desc: "Migramos tu negocio a la nube con infraestructuras modernas, seguras y de alta disponibilidad global.",
                 f1: ["Soluciones a medida", "Adaptadas a tus necesidades"], f2: ["Tecnología de vanguardia", "Las mejores herramientas"], f3: ["Soporte continuo", "Acompañamiento garantizado"]
             },
             { 
+                badge: "Innovación tecnológica",
                 title: "Smart Innovation", 
                 desc: "Transformamos ideas complejas en productos digitales intuitivos y de alto impacto real en el mercado.",
                 f1: ["Soluciones a medida", "Adaptadas a tus necesidades"], f2: ["Tecnología de vanguardia", "Las mejores herramientas"], f3: ["Soporte continuo", "Acompañamiento garantizado"]
@@ -960,6 +1810,7 @@
 
         let index = 0;
         const textSide = document.getElementById('text-side');
+        const badgeEl = document.getElementById('hero-badge');
         const titleEl = document.getElementById('main-title');
         const descEl = document.getElementById('main-desc');
         const images = document.querySelectorAll('.png-slide');
@@ -980,6 +1831,7 @@
                 index = (index + 1) % contentData.length;
                 const data = contentData[index];
 
+                badgeEl.innerText = data.badge;
                 titleEl.innerText = data.title;
                 descEl.innerText = data.desc;
                 ft1.innerText = data.f1[0]; fd1.innerText = data.f1[1];
@@ -1001,6 +1853,166 @@
             images[0].classList.add('active', 'slide-in');
             setTimeout(() => images[0].classList.add('floating'), 1000);
             setInterval(updateSlide, 18000);
+        });
+
+        // ===== SDX Tech Stack Explorer JS =====
+        const engineBanner = document.getElementById('engineBanner');
+        const bannerGlow = document.getElementById('bannerGlow');
+        const techButtons = document.querySelectorAll('.tech-btn');
+        const detailText = document.getElementById('detailText');
+        const detailTitle = document.getElementById('detailTitle');
+        const detailDesc = document.getElementById('detailDesc');
+
+        // Dynamic Glow Tracking Mouse Movement
+        if (engineBanner && bannerGlow) {
+            engineBanner.addEventListener('mousemove', (e) => {
+                const rect = engineBanner.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                bannerGlow.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        }
+
+        // Tech Data Dictionary
+        const techData = {
+            react: {
+                title: 'React',
+                desc: 'Aplicaciones Web Premium con interfaces altamente responsivas, fluidas y totalmente optimizadas para SEO.'
+            },
+            node: {
+                title: 'Node.js',
+                desc: 'Backends rápidos y escalables basados en microservicios, preparados para manejar gran volumen de peticiones concurrentes.'
+            },
+            go: {
+                title: 'Go',
+                desc: 'Servicios de alta velocidad y APIs ultrarrápidas con latencia mínima, ideales para procesamiento crítico en tiempo real.'
+            },
+            python: {
+                title: 'Python',
+                desc: 'Integración de modelos inteligentes (LLM), procesamiento de datos avanzado, automatizaciones y backends robustos.'
+            },
+            aws: {
+                title: 'AWS',
+                desc: 'Infraestructura cloud segura, automatizada con Terraform (IaC), escalado dinámico y configuraciones de alta disponibilidad.'
+            }
+        };
+
+        // Switch active tech and animate description transition
+        function selectTech(techKey, button) {
+            if (button.classList.contains('active')) return;
+
+            // Update active button state
+            techButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Fade out detail card
+            detailText.classList.add('changing');
+
+            setTimeout(() => {
+                // Update content
+                const data = techData[techKey];
+                detailTitle.textContent = data.title;
+                detailDesc.textContent = data.desc;
+
+                // Fade in detail card
+                detailText.classList.remove('changing');
+
+                // Trigger subtle glow flash
+                engineBanner.classList.add('flash-ping');
+                setTimeout(() => {
+                    engineBanner.classList.remove('flash-ping');
+                }, 500);
+            }, 200);
+        }
+
+        if (techButtons && detailText && detailTitle && detailDesc) {
+            techButtons.forEach(btn => {
+                const techKey = btn.getAttribute('data-tech');
+                
+                btn.addEventListener('click', () => {
+                    selectTech(techKey, btn);
+                });
+
+                btn.addEventListener('mouseenter', () => {
+                    selectTech(techKey, btn);
+                });
+            });
+        }
+
+        // ===== Lógica del Flujo de Proceso con Carga Dinámica Secuencial =====
+        const processSteps = document.querySelectorAll('.process-step');
+        const activeTrack = document.getElementById('activeTrack');
+
+        const setTrackWidth = (percentage) => {
+            const isMobile = window.innerWidth <= 768;
+            if (activeTrack) {
+                if (isMobile) {
+                    activeTrack.style.width = '100%';
+                    activeTrack.style.height = `${percentage}%`;
+                } else {
+                    activeTrack.style.height = '100%';
+                    activeTrack.style.width = `${percentage}%`;
+                }
+            }
+        };
+
+        const activateUpToStep = (stepNumber) => {
+            processSteps.forEach((s, idx) => {
+                if (idx < stepNumber) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            let percentage = 0;
+            if (stepNumber === 1) percentage = 0;
+            else if (stepNumber === 2) percentage = 25;
+            else if (stepNumber === 3) percentage = 50;
+            else if (stepNumber === 4) percentage = 75;
+            else if (stepNumber === 5) percentage = 100;
+
+            setTrackWidth(percentage);
+        };
+
+        const startLoadingSequence = () => {
+            let currentStep = 1;
+            activateUpToStep(1);
+
+            const interval = setInterval(() => {
+                currentStep++;
+                activateUpToStep(currentStep);
+
+                if (currentStep >= 5) {
+                    clearInterval(interval);
+                    // No habilitamos la interacción del cursor para cumplir con la regla de no-interferencia
+                }
+            }, 700);
+        };
+
+        // Disparar la animación de carga automática al ser visible en pantalla
+        const processObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(startLoadingSequence, 300);
+                    processObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const processSection = document.getElementById('process-wrapper');
+        if (processSection) {
+            processObserver.observe(processSection);
+        }
+
+
+
+        window.addEventListener('resize', () => {
+            const activeSteps = document.querySelectorAll('.process-step.active');
+            if (activeSteps.length > 0) {
+                const lastActiveNum = activeSteps.length;
+                activateUpToStep(lastActiveNum);
+            }
         });
     </script>
 </body>
